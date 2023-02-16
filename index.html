@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <link rel="stylesheet" href="./pages/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trevel</title>
+  </head>
+  <body class="page">
+      <header class="header"></header>
+      <main class="main">
+        <section class="profile">
+          <div class="profile__info">
+            <img class="profile__photo" src="./image/prifile.jpg" alt="Мое фото">
+            <div class="profile__texts">
+              <div class="profile__text">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <button class="profile__edit-button button-hover"></button>
+              </div>
+              <p class="profile__about">Исследователь океана</p>
+            </div>
+          </div>
+          <button class="profile__add-button button-hover"></button>
+        </section>
+        <section>
+          <ul class="elements">
+            <li class="element"><img class="element__image" src="./image/kirill-pershin-1088404-unsplashelement-1.jpg" alt="город">
+              <div class="element__text">
+                <h2 class="element__title">Карачаевск</h2>
+                <button class="element__like-button element__like-button_hover element__like-button_active"></button>
+              </div></li>
+            <li class="element"><img class="element__image" src="./image/kirill-pershin-1404681-unsplashelement-1.jpg" alt="город">
+              <div class="element__text">
+                <h2 class="element__title">Гора Эльбрус</h2>
+                <button class="element__like-button element__like-button_hover element__like-button_active"></button>
+              </div></li>
+            <li class="element"><img class="element__image" src="./image/kirill-pershin-1556355-unsplashelement-1.jpg" alt="город">
+              <div class="element__text">
+                <h2 class="element__title">Домбай</h2>
+                <button class="element__like-button element__like-button_hover element__like-button_active"></button>
+              </div></li>
+            <li class="element"><img class="element__image" src="./image/kirill-pershin-1404681-unsplashelement-1.jpg" alt="город">
+              <div class="element__text">
+                <h2 class="element__title">Гора Эльбрус</h2>
+                <button class="element__like-button element__like-button_hover element__like-button_active"></button>
+              </div></li>
+            <li class="element"><img class="element__image" src="./image/kirill-pershin-1556355-unsplashelement-1.jpg" alt="город">
+              <div class="element__text">
+                <h2 class="element__title">Домбай</h2>
+                <button class="element__like-button element__like-button_hover element__like-button_active"></button>
+              </div></li>
+              <li class="element"><img class="element__image" src="./image/kirill-pershin-1088404-unsplashelement-1.jpg" alt="город">
+                <div class="element__text">
+                  <h2 class="element__title">Карачаево-Черкессия</h2>
+                  <button class="element__like-button element__like-button_hover element__like-button_active"></button>
+                </div></li>
+          </ul>
+        </section>
+      </main>
+      <footer class="footer">
+        <h1 class="footer__copyright">© 2020 Mesto Russia</h1>
+      </footer>
+      <section class="popup">
+        <div class="popup__container">
+          <div class="popup__container-close">
+            <button class="popup__close-button button-hover"></button>
+            <div class="popup__content">
+              <h2 class="popup__title">Редактировать профиль</h2>
+              <div class="popup__fields">
+                <input class="popup__field popup__field-name" type="text" name="name" id="name" value="Жак-Ив Кусто">
+                <input class="popup__field popup__field-about" type="text" name="about" id="about" value="Исследователь океана">
+              </div>
+              <button class="popup__save-button">Сохранить</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <script src="./js/script.js"></script>
+  </body>
+</html>

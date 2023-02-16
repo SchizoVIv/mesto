@@ -1,0 +1,23 @@
+.header {
+  max-width: 880px;
+  width: 100%;
+  min-height: 74px;
+  margin: 45px auto 0;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+  background-image: url(../../image/logo.svg);
+  background-repeat: no-repeat;
+}
+@media screen and (max-width: 1024px) {
+    .header{
+        background-position: 7% 0;
+      }
+}
+@media screen and (max-width: 767px) {
+    .header {
+        max-width: 767px;
+        min-height: 56px;
+        margin: 28px auto 0;
+        background-size: 103.74px 24.4px;
+        background-position: 27px 0;
+      }
+}
