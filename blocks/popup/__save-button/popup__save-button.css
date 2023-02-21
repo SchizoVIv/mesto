@@ -10,6 +10,7 @@
   line-height: 22px;
   cursor: pointer;
   transition: 0.5s ease;
+  border: none;
 }
 .popup__save-button:hover{
   background: rgb(0, 0, 0, .8);
