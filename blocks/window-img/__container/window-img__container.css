@@ -1,0 +1,11 @@
+.window-img__container{
+  position: relative;
+  max-width: 816px;
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 767px) {
+  .window-img__container{
+      max-width: 282px;
+    }
+}
