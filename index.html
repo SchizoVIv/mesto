@@ -45,8 +45,8 @@
       <section class="popup popup-profile">
         <div class="popup__container">
           <button class="popup__close-button popup__close-button_profile button-hover" type="button" aria-label="Закрыть попап"></button>
+          <h2 class="popup__title">Редактировать профиль</h2>
           <form class="popup__content" name="popapProfile" id="popapContentProfile" action="">
-            <h2 class="popup__title">Редактировать профиль</h2>
             <div class="popup__fields">
               <input class="popup__field popup__field_name" type="text" name="name" id="inputName" placeholder="Имя">
               <input class="popup__field popup__field_about" type="text" name="about" id="inputAbout" placeholder="Род деятельности">
@@ -58,8 +58,8 @@
       <section class="popup popup-cards">
         <div class="popup__container">
           <button class="popup__close-button popup__close-button_cards button-hover" type="button" aria-label="Закрыть попап"></button>
+          <h2 class="popup__title">Новое место</h2>
           <form class="popup__content" name="popapCards" id="popapContentCards" action="">
-            <h2 class="popup__title">Новое место</h2>
             <div class="popup__fields">
               <input class="popup__field popup__field_name-card" type="text" name="title" id="inputNameСard" placeholder="Название">
               <input class="popup__field popup__field_link-card" type="text" name="link" id="inputAboutСard" placeholder="Ссылка на картинку">
@@ -68,13 +68,17 @@
           </form>
         </div>
       </section>
-      <section class="window-img">
-        <div class="window-img__container">
-          <img class="window-img__image" src="https://i.pinimg.com/564x/09/d6/e9/09d6e965ada215a1d87fb392979f808a.jpg" alt="">
-          <span class="window-img__title"></span>
-          <button class="window-img__close-button button-hover" type="button" aria-label="Закрыть картинку"></button>
+
+      <section class="popup popup-open-img">
+        <div class="popup__container popup-open-img__container">
+          <button class="popup__close-button popup-open-img__close-button button-hover" type="button" aria-label="Закрыть картинку"></button>
+          <div class="popup__content popup-open-img__content-img">
+            <img class="popup-open-img__image" src="https://i.pinimg.com/564x/09/d6/e9/09d6e965ada215a1d87fb392979f808a.jpg" alt="">
+            <span class="popup-open-img__title"></span>
+          </div>
         </div>
       </section>
+      <script src="./js/cards.js"></script>
       <script src="./js/index.js"></script>
   </body>
 </html>
