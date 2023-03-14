@@ -1,7 +1,7 @@
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonCloseCards = document.querySelector('.popup__close-button_cards');
-const buttonClosePopup = document.querySelectorAll('.popup__close-button');
+const buttonClosePopupList = document.querySelectorAll('.popup__close-button');
 const popupProfile = document.querySelector('.popup-profile');
 const popupFieldAbout = document.querySelector('.popup__field_about');
 const popupFieldName = document.querySelector('.popup__field_name');
@@ -23,11 +23,7 @@ const windowTitle = windowImgConteiner.querySelector('.popup-open-img__title');
 popupFieldName.value = profileName.textContent
 popupFieldAbout.value = profileAbout.textContent
 
-buttonClosePopup.forEach((button) => {
-  button.addEventListener('click', () => {
-  button.parentElement.classList.remove('popup_opened')
-  });
-});
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
@@ -48,9 +44,6 @@ function handleFormSubmit (evt) {
     closePopup(popupProfile);
 }
 
-function closeWindowImg(){
-  windowImgConteiner.classList.remove('popup_opened')
-}
 console.log(cardTemplate);
 
 const render = function renderCard(card){
@@ -71,7 +64,7 @@ const createCard = card =>{
 // лайк
   buttonLike.addEventListener('click', like)
 // удаление карты
-  deleteButton.addEventListener('click', cardsButtonDelete)
+  deleteButton.addEventListener('click', deleteCardsButton)
 // просмотр картинки
   cardImage.addEventListener("click", event=>{
     openPopup(windowImgConteiner)
@@ -87,7 +80,7 @@ function like (event) {
   event.target.classList.toggle('element__like-button_active')
 }
 
-function cardsButtonDelete(event) {
+function deleteCardsButton(event) {
   const button = event.target
   const card = button.closest('.element')
   card.remove()
