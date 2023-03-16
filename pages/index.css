@@ -42,6 +42,7 @@
 @import url(../blocks/popup-open-img/__close-button/popup-open-img__close-button.css);
 @import url(../blocks/popup-open-img/__content/popup-open-img__content.css);
 @import url(../blocks/popup/__container/_width_100/popup__container_width_100.css);
+@import url(../blocks/popup/__container/_max-width_282/popup__container_max-width_282.css);
 
 
 
