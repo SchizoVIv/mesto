@@ -35,10 +35,10 @@ function closeByEscape(evt) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  const buttonElement = popup.querySelector('.popup__save-button');
-  const buttonInactive = 'popup__save-button_inactive';
+  // const buttonElement = popup.querySelector('.popup__save-button');
+  // const buttonInactive = 'popup__save-button_inactive';
   document.addEventListener('keydown', closeByEscape);
-  disableButton(buttonElement, buttonInactive)
+  // disableButton(buttonElement, buttonInactive)
 }
 
 function closePopup(popup) {
