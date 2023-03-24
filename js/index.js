@@ -19,23 +19,56 @@ const buttonLike = document.querySelector('.element__like-button');
 const windowImgConteiner = document.querySelector('.popup-open-img');
 const windowImage = windowImgConteiner.querySelector('.popup-open-img__image');
 const windowTitle = windowImgConteiner.querySelector('.popup-open-img__title');
+const popupProfileForm = document.forms['popapProfile'];
+const popupCardsForm = document.forms['popapCards'];
+const popupList = document.querySelectorAll('.popup');
 
 popupFieldName.value = profileName.textContent
 popupFieldAbout.value = profileAbout.textContent
 
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  const buttonElement = popup.querySelector('.popup__save-button');
+  const buttonInactive = 'popup__save-button_inactive';
+  document.addEventListener('keydown', closeByEscape);
+  disableButton(buttonElement, buttonInactive)
 }
 
-function closePopup(popup){
-  popup.classList.remove('popup_opened')
+function closePopup(popup) {
+  if (popup !== undefined) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeByEscape);
+  }
 }
+function findActivePopup(popupList) {
+  const list = Array.from(popupList);
+  return list.find((popup) => {
+    if (popup.classList.contains('popup_opened')) {
+      return popup;
+    }
+  });
+}
+
+function handlePopupClose(evt) {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
+    closePopup(findActivePopup(popupList));
+  }
+}
+
 
 document.querySelectorAll('.popup__close-button').forEach(button => {
   const buttonsPopup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(buttonsPopup));
+
 });
+
 
 function handleFormSubmit (evt) {
     evt.preventDefault();
@@ -44,12 +77,11 @@ function handleFormSubmit (evt) {
     closePopup(popupProfile);
 }
 
-console.log(cardTemplate);
-
 const render = function renderCard(card){
   const newCard = createCard(card)
   cardsContainer.prepend(newCard)
 }
+
 // создание карт
 const createCard = card =>{
 
@@ -96,7 +128,13 @@ function createNewCard(event){
   }
   render(card)
   closePopup(popupCards)
+  popupFieldNameCards.value = ''
+  popupFieldLink.value = ''
 }
+
+popupList.forEach((popup) => {
+  popup.addEventListener('click', handlePopupClose);
+});
 buttonEditProfile.addEventListener("click", function (){
   openPopup(popupProfile)
 });
