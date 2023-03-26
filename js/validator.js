@@ -1,6 +1,5 @@
 const showInputError = (formElement, inputElement, inputErrorType, errorMessage, inputErrorTypeClass, errorClassActive) => {
   const errorElement = formElement.querySelector(`${inputErrorType}${inputElement.id}`);
-  console.log(errorElement)
   inputElement.classList.add(inputErrorTypeClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClassActive);
@@ -14,9 +13,6 @@ const hideInputError = (formElement, inputElement, inputErrorType, inputErrorTyp
 }
 
 const checkInputValidity = (formElement, inputElement, inputErrorType, inputErrorTypeClass, errorClassActive)=>{
-  console.log(inputErrorType)
-  const errorTextElement = document.querySelector(`${inputErrorType}${inputElement.id}`)
-  console.log(errorTextElement)
   if(!inputElement.validity.valid){
     showInputError(formElement, inputElement, inputErrorType, inputElement.validationMessage, inputErrorTypeClass, errorClassActive)
     console.log('input is not valid')
@@ -46,6 +42,7 @@ const setEventListeners = (formElement, inputErrorType, inputSelector, submitBut
 
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
+
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
@@ -55,7 +52,6 @@ const enableValidation = (config) => {
 };
 
 function hasInvalidInput (inputList){
-  console.log(inputList)
   return inputList.some((inputElement) =>{
     return !inputElement.validity.valid;
   })
@@ -64,6 +60,7 @@ function hasInvalidInput (inputList){
 function disableButton (buttonElement, inactiveButtonClass){
   buttonElement.classList.add(inactiveButtonClass);
   buttonElement.disabled = true;
+
 }
 
 function enableButton (buttonElement, inactiveButtonClass){
