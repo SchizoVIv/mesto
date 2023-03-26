@@ -64,6 +64,7 @@ function disableButton (buttonElement, inactiveButtonClass){
   buttonElement.classList.add(inactiveButtonClass);
   buttonElement.disabled = true;
   console.log(buttonElement)
+
 }
 
 function enableButton (buttonElement, inactiveButtonClass){

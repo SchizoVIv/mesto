@@ -135,16 +135,3 @@ buttonAdd.addEventListener("click", function (){
 popupContentCardsForm.addEventListener('submit', createNewCard);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
