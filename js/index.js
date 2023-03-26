@@ -53,20 +53,19 @@ function findActivePopup(popupList) {
 
 function handlePopupClose(evt) {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
-    closePopup(findActivePopup(popupList));
+    closePopup(evt.currentTarget);
   }
 }
 
 
-function handleFormSubmit (evt) {
+function handleProfileFormSubmit (evt) {
     evt.preventDefault();
     profileName.textContent = popupFieldName.value;
     profileAbout.textContent = popupFieldAbout.value;
     closePopup(popupProfile);
-    disableButton()
 }
 
-const render = function renderCard(card){
+function renderCard(card){
   const newCard = createCard(card)
   cardsContainer.prepend(newCard)
 }
@@ -83,7 +82,7 @@ const createCard = card =>{
   const buttonLike = cardTemplateCopy.querySelector('.element__like-button')
   const deleteButton = cardTemplateCopy.querySelector('.element__delete-button')
 // лайк
-  buttonLike.addEventListener('click', like)
+  buttonLike.addEventListener('click', toggleLike)
 // удаление карты
   deleteButton.addEventListener('click', deleteCardsButton)
 // просмотр картинки
@@ -96,8 +95,8 @@ const createCard = card =>{
   return cardTemplateCopy
 }
 
-initialCards.forEach(render);
-function like (event) {
+initialCards.forEach(renderCard);
+function toggleLike (event) {
   event.target.classList.toggle('element__like-button_active')
 }
 
@@ -115,7 +114,7 @@ function createNewCard(event){
     name: cardTitleValue,
     link: cardImageValue
   }
-  render(card)
+  renderCard(card)
   event.target.reset()
   closePopup(popupCards)
 }
@@ -128,7 +127,7 @@ buttonEditProfile.addEventListener("click", function (){
   popupFieldAbout.value = profileAbout.textContent
   openPopup(popupProfile)
 });
-popupContentProfileForm.addEventListener('submit', handleFormSubmit);
+popupContentProfileForm.addEventListener('submit', handleProfileFormSubmit);
 buttonAdd.addEventListener("click", function (){
   openPopup(popupCards)
 });
