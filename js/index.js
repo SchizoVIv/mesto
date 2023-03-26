@@ -61,6 +61,7 @@ function handleProfileFormSubmit (evt) {
     profileName.textContent = popupFieldName.value;
     profileAbout.textContent = popupFieldAbout.value;
     closePopup(popupProfile);
+    disableButton()
 }
 
 function renderCard(card){
@@ -113,12 +114,10 @@ function createNewCard(event){
     name: cardTitleValue,
     link: cardImageValue
   }
-  renderCard(card)
+  render(card)
   event.target.reset()
-  console.log(event.target)
   closePopup(popupCards)
 
-}
 
 
 popupList.forEach((popup) => {

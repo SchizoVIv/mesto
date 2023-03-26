@@ -1,4 +1,3 @@
-
 const showInputError = (formElement, inputElement, inputErrorType, errorMessage, inputErrorTypeClass, errorClassActive) => {
   const errorElement = formElement.querySelector(`${inputErrorType}${inputElement.id}`);
   inputElement.classList.add(inputErrorTypeClass);
@@ -32,6 +31,12 @@ const setEventListeners = (formElement, config)=>{
     disableButton(buttonElement, config);
   });
 
+  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+
+  formElement.addEventListener('reset', () => {
+    disableButton(buttonElement, inactiveButtonClass);
+  });
+
   inputList.forEach((input) => {
     input.addEventListener('input', ()=>{
       checkInputValidity(formElement, input, config)
@@ -47,12 +52,8 @@ const enableValidation = (config) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
     });
+    setEventListeners(formElement, config.inputErrorType, config.inputSelector, config.submitButtonSelector, config.inputErrorTypeClass, config.errorClassActive, config.inactiveButtonClass);
 
-    const fieldsetList = Array.from(formElement.querySelectorAll(config.fieldsetList));
-    fieldsetList.forEach((fieldSet) => {
-      console.log(fieldSet)
-      setEventListeners(fieldSet, config);
-    });
   });
 };
 
@@ -72,6 +73,9 @@ function enableButton (buttonElement, config){
   buttonElement.disabled = false;
 }
 
+function toggleButtonState(inputList, buttonElement, inactiveButtonClass){
+  disableButton(buttonElement, inactiveButtonClass);
+  
 function toggleButtonState(inputList, buttonElement, config){
   disableButton(buttonElement, config);
   if (hasInvalidInput(inputList)) {
