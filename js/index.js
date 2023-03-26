@@ -151,10 +151,3 @@ popupContentCardsForm.addEventListener('submit', createNewCard);
 
 
 
-
-
-
-
-
-
-
