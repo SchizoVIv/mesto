@@ -23,9 +23,10 @@ const checkInputValidity = (formElement, inputElement, inputErrorType, inputErro
 }
 
 const setEventListeners = (formElement, inputErrorType, inputSelector, submitButtonSelector, inputErrorTypeClass, errorClassActive, inactiveButtonClass)=>{
+
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
-
+console.log(buttonElement)
   toggleButtonState(inputList, buttonElement, inactiveButtonClass);
 
   formElement.addEventListener('reset', () => {
@@ -41,7 +42,9 @@ const setEventListeners = (formElement, inputErrorType, inputSelector, submitBut
 };
 
 const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  const forms = document.forms;
+  const formList = Array.from(forms);
+  console.log(formList)
 
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
@@ -60,6 +63,7 @@ function hasInvalidInput (inputList){
 function disableButton (buttonElement, inactiveButtonClass){
   buttonElement.classList.add(inactiveButtonClass);
   buttonElement.disabled = true;
+  console.log(buttonElement)
 
 }
 
