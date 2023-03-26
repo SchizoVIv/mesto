@@ -1,4 +1,3 @@
-
 const showInputError = (formElement, inputElement, inputErrorType, errorMessage, inputErrorTypeClass, errorClassActive) => {
   const errorElement = formElement.querySelector(`${inputErrorType}${inputElement.id}`);
   console.log(errorElement)
@@ -31,6 +30,12 @@ const setEventListeners = (formElement, inputErrorType, inputSelector, submitBut
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
 
+  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+
+  formElement.addEventListener('reset', () => {
+    disableButton(buttonElement, inactiveButtonClass);
+  });
+
   inputList.forEach((input) => {
     input.addEventListener('input', ()=>{
       checkInputValidity(formElement, input, inputErrorType, inputErrorTypeClass, errorClassActive)
@@ -45,10 +50,7 @@ const enableValidation = (config) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
     });
-    const fieldsetList = Array.from(formElement.querySelectorAll(config.fieldsetList));
-    fieldsetList.forEach((fieldSet) => {
-      setEventListeners(fieldSet, config.inputErrorType, config.inputSelector, config.submitButtonSelector, config.inputErrorTypeClass, config.errorClassActive, config.inactiveButtonClass);
-    });
+    setEventListeners(formElement, config.inputErrorType, config.inputSelector, config.submitButtonSelector, config.inputErrorTypeClass, config.errorClassActive, config.inactiveButtonClass);
   });
 };
 
@@ -70,6 +72,7 @@ function enableButton (buttonElement, inactiveButtonClass){
 }
 
 function toggleButtonState(inputList, buttonElement, inactiveButtonClass){
+  disableButton(buttonElement, inactiveButtonClass);
   if (hasInvalidInput(inputList)) {
     disableButton(buttonElement, inactiveButtonClass)
   } else {
@@ -87,4 +90,3 @@ enableValidation({
   fieldsetList: '.popup__fieldset',
   inputErrorType: '.popup__input-error_type_',
 });
-
