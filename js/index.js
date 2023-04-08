@@ -1,4 +1,32 @@
 
+const initialCards = [
+  {
+    name: 'Алина Цветко',
+    link: 'https://i.pinimg.com/564x/17/ac/9b/17ac9b9b85f65d91dfb5c3fab93ec495.jpg'
+  },
+  {
+    name: 'Евангелина Фраим',
+    link: 'https://i.pinimg.com/750x/fc/2f/6e/fc2f6ee37f27f8bd1204e7fb32f88955.jpg'
+  },
+  {
+    name: 'София Фадеева',
+    link: 'https://i.pinimg.com/564x/96/a3/44/96a34450be9c5f34d577d0930fbc2530.jpg'
+  },
+  {
+    name: 'Крис Спиридонова',
+    link: 'https://i.pinimg.com/564x/9b/f9/84/9bf9849458f40c1dac246f38c9ca5b96.jpg'
+  },
+  {
+    name: 'Ольга Никонова',
+    link: 'https://i.pinimg.com/564x/24/a7/4e/24a74e1ea5b2bef973da515d65cfba6b.jpg'
+  },
+  {
+    name: 'Просто Ваня',
+    link: 'https://i.pinimg.com/564x/09/d6/e9/09d6e965ada215a1d87fb392979f808a.jpg'
+  }
+];
+
+
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonCloseCards = document.querySelector('.popup__close-button_cards');
 const buttonClosePopupList = document.querySelectorAll('.popup__close-button');
@@ -10,11 +38,11 @@ const profileAbout = document.querySelector('.profile__about');
 const popupContentProfileForm = document.querySelector('#popapContentProfile');
 const popupContentCardsForm = document.querySelector('#popapContentCards');
 const cardTemplate = document.querySelector('#cardTemplate').content.querySelector('.element');
-const cardsContainer = document.querySelector('.elements');
-const buttonAdd = document.querySelector('.profile__add-button');
 const popupCards = document.querySelector('.popup-cards');
 const popupFieldLink = popupCards.querySelector('.popup__field_link-card');
 const popupFieldNameCards = popupCards.querySelector('.popup__field_name-card');
+const cardsContainer = document.querySelector('.elements');
+const buttonAdd = document.querySelector('.profile__add-button');
 const buttonLike = document.querySelector('.element__like-button');
 const windowImgConteiner = document.querySelector('.popup-open-img');
 const windowImage = windowImgConteiner.querySelector('.popup-open-img__image');
@@ -22,12 +50,33 @@ const windowTitle = windowImgConteiner.querySelector('.popup-open-img__title');
 const popupProfileForm = document.forms['popapProfile'];
 const popupCardsForm = document.forms['popapCards'];
 
+const config = {
+  formSelector: '.popup__content',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_inactive',
+  inputErrorTypeClass: '.popup__field_type_error',
+  errorClassActive: 'popup__input-error_active',
+  fieldsetList: '.popup__fieldset',
+  inputErrorType: '.popup__input-error_type_',
+};
+
+const profileFormValidator = new Validator(config, popupProfileForm);
+const addingFormValidator = new Validator(config, popupCardsForm);
+
 const popupList = document.querySelectorAll('.popup');
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
+}
+
+function openCardImage (cardName, cardLink) {
+  openPopup(windowImgConteiner)
+  windowImage.src = cardLink
+  windowImage.alt = cardName
+  windowTitle.textContent = windowImage.alt
 }
 
 function openPopup(popup) {
@@ -70,40 +119,15 @@ function renderCard(card){
   cardsContainer.prepend(newCard)
 }
 
-// создание карт
-const createCard = card =>{
-
-  const cardTemplateCopy = cardTemplate.cloneNode(true)
-  const cardTitle = cardTemplateCopy.querySelector('.element__title')
-  const cardImage = cardTemplateCopy.querySelector('.element__image')
-  cardTitle.textContent = card.name
-  cardImage.setAttribute('src', card.link)
-  cardImage.setAttribute('alt', card.name)
-  const buttonLike = cardTemplateCopy.querySelector('.element__like-button')
-  const deleteButton = cardTemplateCopy.querySelector('.element__delete-button')
-// лайк
-  buttonLike.addEventListener('click', toggleLike)
-// удаление карты
-  deleteButton.addEventListener('click', deleteCardsButton)
-// просмотр картинки
-  cardImage.addEventListener("click", event=>{
-    openPopup(windowImgConteiner)
-    windowImage.src = event.target.getAttribute('src')
-    windowImage.alt = event.target.getAttribute('alt')
-    windowTitle.textContent = windowImage.alt
-  })
-  return cardTemplateCopy
+function createCard(cardData) {
+  const card = new Card(cardData, cardTemplate, openCardImage);
+  const cardElement = card.createCard();
+  return cardElement
 }
 
 initialCards.forEach(renderCard);
 function toggleLike (event) {
   event.target.classList.toggle('element__like-button_active')
-}
-
-function deleteCardsButton(event) {
-  const button = event.target
-  const card = button.closest('.element')
-  card.remove()
 }
 
 function createNewCard(event){
@@ -122,13 +146,19 @@ function createNewCard(event){
 popupList.forEach((popup) => {
   popup.addEventListener('click', handlePopupClose);
 });
+
 buttonEditProfile.addEventListener("click", function (){
   popupFieldName.value = profileName.textContent
   popupFieldAbout.value = profileAbout.textContent
   openPopup(popupProfile)
 });
+
 popupContentProfileForm.addEventListener('submit', handleProfileFormSubmit);
 buttonAdd.addEventListener("click", function (){
   openPopup(popupCards)
 });
+
 popupContentCardsForm.addEventListener('submit', createNewCard);
+
+profileFormValidator.enableValidation();
+addingFormValidator.enableValidation();
