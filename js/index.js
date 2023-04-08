@@ -1,4 +1,5 @@
-
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 const initialCards = [
   {
     name: 'Алина Цветко',
@@ -61,10 +62,11 @@ const config = {
   inputErrorType: '.popup__input-error_type_',
 };
 
-const profileFormValidator = new Validator(config, popupProfileForm);
-const addingFormValidator = new Validator(config, popupCardsForm);
+const profileFormValidator = new FormValidator(config, popupProfileForm);
+const addingFormValidator = new FormValidator(config, popupCardsForm);
 
 const popupList = document.querySelectorAll('.popup');
+
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
@@ -126,9 +128,6 @@ function createCard(cardData) {
 }
 
 initialCards.forEach(renderCard);
-function toggleLike (event) {
-  event.target.classList.toggle('element__like-button_active')
-}
 
 function createNewCard(event){
   event.preventDefault();
@@ -144,7 +143,7 @@ function createNewCard(event){
 }
 
 popupList.forEach((popup) => {
-  popup.addEventListener('click', handlePopupClose);
+  popup.addEventListener('mousedown', handlePopupClose);
 });
 
 buttonEditProfile.addEventListener("click", function (){
