@@ -162,5 +162,3 @@ popupContentCardsForm.addEventListener('submit', createNewCard);
 
 profileFormValidator.enableValidation();
 addingFormValidator.enableValidation();
-
-
