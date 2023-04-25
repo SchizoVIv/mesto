@@ -12,3 +12,8 @@
 .element__like-button:hover{
   opacity: 50%;
 }
+@media screen and (max-width: 767px) {
+  .element__like-button:hover{
+    opacity: 100%;
+  }
+}
