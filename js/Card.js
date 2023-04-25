@@ -28,10 +28,12 @@ export default class Card {
   }
 
   createCard() {
-    this._element = this._cardTemplateSelector.cloneNode(true)
+    this._element = document
+    .querySelector(this._cardTemplateSelector)
+    .content.querySelector('.element')
+    .cloneNode(true);
     this._cardTitle = this._element.querySelector('.element__title');
     this._cardImage = this._element.querySelector('.element__image');
-
     this._cardTitle.textContent = this._title;
     this._cardImage.src = this._image;
     this._cardImage.alt = this._title;
