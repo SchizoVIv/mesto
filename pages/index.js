@@ -50,8 +50,12 @@ const userInfo = new UserInfo({
 const popupWithImage = new PopupWithImage('.popup-open-img')
 popupWithImage.setEventListeners();
 
-const popupWithForm = new PopupWithForm('.popup', {callbackSubmit: userData => {
-  const newInfo = { username: userData.name, userinfo: userData.position };
+const popupWithForm = new PopupWithForm('.popup', {
+  callbackSubmit: userData => {
+  const newInfo = {
+    userName: userData.name,
+    aboutUser: userData.about };
+  console.log(newInfo)
   userInfo.setUserInfo(newInfo);
   popupWithForm.close();
 }} )
@@ -75,8 +79,9 @@ const popupAddCard = new PopupWithForm('.popup-cards', {
 popupAddCard.setEventListeners();
 
 buttonEditProfile.addEventListener("click", function (){
-  popupFieldName.value = profileName.textContent
-  popupFieldAbout.value = profileAbout.textContent
+  const profileInfo = userInfo.getUserInfo();
+  popupFieldName.value = profileInfo.userName
+  popupFieldAbout.value = profileInfo.aboutUser
   popupWithForm.open();
 });
 
