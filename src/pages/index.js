@@ -8,8 +8,6 @@ import {
   buttonEditProfile,
   popupFieldName,
   popupFieldAbout,
-  profileName,
-  profileAbout,
   buttonAdd} from '../utils/constants.js';
 import {FormValidator} from '../js/FormValidator.js';
 import Card from '../js/Card.js';
@@ -17,7 +15,6 @@ import Section from '../js/Section.js';
 import PopupWithImage from '../js/PopupWithImage.js';
 import PopupWithForm from '../js/PopupWithForm.js';
 import UserInfo from '../js/UserInfo.js';
-// import path from 'path';
 
 const profileFormValidator = new FormValidator(config, popupProfileForm);
 const addingFormValidator = new FormValidator(config, popupCardsForm);
