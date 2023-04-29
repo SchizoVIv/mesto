@@ -1,8 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   entry: {
     main: './src/pages/index.js'
@@ -13,12 +12,11 @@ module.exports = {
     publicPath: ''
   },
   mode: 'development',
-  devtool: 'source-map',
   devServer: {
     static: path.resolve(__dirname, './dist'),
-    open: true,
     compress: true,
-    port: 8080
+    port: 8080,
+    open: true,
   },
   module: {
     rules: [
@@ -52,5 +50,6 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin()
-  ]
+  ],
+  devtool: 'source-map'
 };
