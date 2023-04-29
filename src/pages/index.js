@@ -1,3 +1,4 @@
+import './index.css';
 import {
   config,
   popupProfileForm,
@@ -16,6 +17,7 @@ import Section from '../js/Section.js';
 import PopupWithImage from '../js/PopupWithImage.js';
 import PopupWithForm from '../js/PopupWithForm.js';
 import UserInfo from '../js/UserInfo.js';
+// import path from 'path';
 
 const profileFormValidator = new FormValidator(config, popupProfileForm);
 const addingFormValidator = new FormValidator(config, popupCardsForm);
