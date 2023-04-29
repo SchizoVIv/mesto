@@ -11,9 +11,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
     publicPath: ''
-    //clean:true вместо плагина
   },
-  mode: 'development', //в финальной сборке - production
+  mode: 'development',
   devtool: 'source-map',
   devServer: {
     static: path.resolve(__dirname, './dist'),
@@ -31,10 +30,6 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
         type: 'asset/resource'
-        //  отдельно правила для картинок и шрифтов с отдельными папками через generator/filename:''
-        /* generator:{
-          filename: 'img/[name].[hash][ext][query]' / filename: 'fonts/[name].[ext][query]'
-        }*/
       },
       {
         test: /\.css$/,
