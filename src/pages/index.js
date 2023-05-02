@@ -9,12 +9,12 @@ import {
   popupFieldName,
   popupFieldAbout,
   buttonAdd} from '../utils/constants.js';
-import {FormValidator} from '../js/FormValidator.js';
-import Card from '../js/Card.js';
-import Section from '../js/Section.js';
-import PopupWithImage from '../js/PopupWithImage.js';
-import PopupWithForm from '../js/PopupWithForm.js';
-import UserInfo from '../js/UserInfo.js';
+import {FormValidator} from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 const profileFormValidator = new FormValidator(config, popupProfileForm);
 const addingFormValidator = new FormValidator(config, popupCardsForm);
