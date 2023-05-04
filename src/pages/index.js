@@ -9,12 +9,12 @@ import {
   popupFieldName,
   popupFieldAbout,
   buttonAdd} from '../utils/constants.js';
-import {FormValidator} from '../js/FormValidator.js';
-import Card from '../js/Card.js';
-import Section from '../js/Section.js';
-import PopupWithImage from '../js/PopupWithImage.js';
-import PopupWithForm from '../js/PopupWithForm.js';
-import UserInfo from '../js/UserInfo.js';
+import {FormValidator} from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 const profileFormValidator = new FormValidator(config, popupProfileForm);
 const addingFormValidator = new FormValidator(config, popupCardsForm);
@@ -23,9 +23,8 @@ const sectionList = new Section(
   {
     items: initialCards,
     renderer: cardData => {
-      const card = new Card(cardData, '#cardTemplate', handlePopupOpen);
-      const cardElement = card.createCard();
-      sectionList.addItem(cardElement);
+      const newCardElement = createCard(cardData);
+      sectionList.addItem(newCardElement);
     }
   },
   cardsContainer
@@ -49,7 +48,7 @@ const userInfo = new UserInfo({
 const popupWithImage = new PopupWithImage('.popup-open-img')
 popupWithImage.setEventListeners();
 
-const popupWithForm = new PopupWithForm('.popup', {
+const popupWithForm = new PopupWithForm('.popup-profile', {
   callbackSubmit: userData => {
   const newInfo = {
     userName: userData.name,
