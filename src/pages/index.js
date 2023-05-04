@@ -23,9 +23,8 @@ const sectionList = new Section(
   {
     items: initialCards,
     renderer: cardData => {
-      const card = new Card(cardData, '#cardTemplate', handlePopupOpen);
-      const cardElement = card.createCard();
-      sectionList.addItem(cardElement);
+      const newCardElement = createCard(cardData);
+      sectionList.addItem(newCardElement);
     }
   },
   cardsContainer
@@ -49,7 +48,7 @@ const userInfo = new UserInfo({
 const popupWithImage = new PopupWithImage('.popup-open-img')
 popupWithImage.setEventListeners();
 
-const popupWithForm = new PopupWithForm('.popup', {
+const popupWithForm = new PopupWithForm('.popup-profile', {
   callbackSubmit: userData => {
   const newInfo = {
     userName: userData.name,
