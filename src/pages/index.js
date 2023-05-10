@@ -15,9 +15,40 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 
 const profileFormValidator = new FormValidator(config, popupProfileForm);
 const addingFormValidator = new FormValidator(config, popupCardsForm);
+
+const api = new Api(
+  {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65',
+  headers: {
+    authorization: '1e197306-3c80-4dea-abe5-170206fcfc3b',
+    'Content-Type': 'application/json'
+  }
+})
+api.getProfile()
+  .then( res => {
+    const info = {
+      userName: res.name,
+      aboutUser: res.about
+    };
+    userInfo.setUserInfo(info)
+  })
+
+  api.getCards()
+    .then(cardList => {
+      cardList.forEach(data => {
+        const newCard = {
+          name: data.name,
+          link: data.link,
+          likes: data.likes
+        };
+        sectionList.addItem(createCard(newCard))
+      })
+    })
+
 
 const sectionList = new Section(
   {
@@ -41,8 +72,6 @@ function createCard(cardData) {
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
   aboutUserSelector: '.profile__about',
-  userInputNameSelector: '.popup__field_name',
-  abouInputtUserSelector: '.popup__field_about'
 });
 
 const popupWithImage = new PopupWithImage('.popup-open-img')
@@ -52,10 +81,15 @@ const popupWithForm = new PopupWithForm('.popup-profile', {
   callbackSubmit: userData => {
   const newInfo = {
     userName: userData.name,
-    aboutUser: userData.about };
-  console.log(newInfo)
-  userInfo.setUserInfo(newInfo);
-  popupWithForm.close();
+    aboutUser: userData.about
+  };
+
+  api.editProfile(userData) //сохраняет измененные данные профиля после обновления
+    .then( res => {
+      console.log('res', res)
+      userInfo.setUserInfo(newInfo);
+      popupWithForm.close();
+    })
 }} )
 popupWithForm.setEventListeners();
 
@@ -65,13 +99,17 @@ function handlePopupOpen(cardName, cardLink){
 
 const popupAddCard = new PopupWithForm('.popup-cards', {
   callbackSubmit: cardData => {
-    console.log(cardData)
     const newCard = {
       name: cardData.title,
-      link: cardData.link
+      link: cardData.link,
+      likes: cardData.likes
     };
-    sectionList.addItem(createCard(newCard));
-    popupAddCard.close();
+    api.addCard(newCard)
+      .then(res => {
+        console.log('res', res)
+        sectionList.addItem(createCard(newCard));
+        popupAddCard.close();
+      })
   }
 });
 popupAddCard.setEventListeners();
