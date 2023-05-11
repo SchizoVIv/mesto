@@ -46,4 +46,13 @@ export default class Api{
     .then( res =>  res.ok ? res.json() : Promise.reject(res.status))
     .catch(console.log)
   }
+
+  deleteCard(cardId){
+    return fetch(`${this._baseUrl}/cards/${cardId} `, {
+      method: "DELETE",
+      headers: this._headers
+    })
+    .then( res =>  res.ok ? res.json() : Promise.reject(res.status))
+    .catch(console.log)
+  }
 }

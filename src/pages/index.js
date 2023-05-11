@@ -16,9 +16,13 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+import ConfirmPopap from '../components/ConfirmPopap.js';
+
+let userId
 
 const profileFormValidator = new FormValidator(config, popupProfileForm);
 const addingFormValidator = new FormValidator(config, popupCardsForm);
+
 
 const api = new Api(
   {
@@ -43,7 +47,8 @@ api.getProfile()
         const newCard = {
           name: data.name,
           link: data.link,
-          likes: data.likes
+          likes: data.likes,
+          id: data._id
         };
         sectionList.addItem(createCard(newCard))
       })
@@ -63,8 +68,32 @@ const sectionList = new Section(
 
 sectionList.renderer()
 
+const popupConfirm = new ConfirmPopap('.popup-question', {
+  callbackSubmit: card => {
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        card.remove()
+        popupConfirm.close()
+      })
+      .catch(err => {
+        console.warn(`Error: ${err.status} - ${err.statusText}`);
+      });
+  }
+})
+popupConfirm.setEventListeners();
+
 function createCard(cardData) {
-  const card = new Card(cardData, '#cardTemplate', handlePopupOpen);
+  const card = new Card(cardData, '#cardTemplate', handlePopupOpen, userId,
+    () => {
+    console.log('удаление карточки')
+    popupConfirm.open()
+    popupConfirm.handleSubmit
+    },
+    () => {
+
+    }
+  );
   const cardElement = card.createCard();
   return cardElement
 }
@@ -76,6 +105,7 @@ const userInfo = new UserInfo({
 
 const popupWithImage = new PopupWithImage('.popup-open-img')
 popupWithImage.setEventListeners();
+
 
 const popupWithForm = new PopupWithForm('.popup-profile', {
   callbackSubmit: userData => {
@@ -102,7 +132,8 @@ const popupAddCard = new PopupWithForm('.popup-cards', {
     const newCard = {
       name: cardData.title,
       link: cardData.link,
-      likes: cardData.likes
+      likes: cardData.likes,
+      id: res._id
     };
     api.addCard(newCard)
       .then(res => {
