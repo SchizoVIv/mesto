@@ -5,6 +5,7 @@ import {
   popupCardsForm,
   popupAvatarForm,
   profileButtonAvatar,
+  popupEditAvatar,
   cardsContainer,
   buttonEditProfile,
   popupFieldName,
@@ -117,7 +118,11 @@ const popupConfirm = new ConfirmPopap('.popup-question', {
 popupConfirm.setEventListeners();
 
 function createCard(cardData) {
-  const card = new Card(cardData, '#cardTemplate', handlePopupOpen, userId,
+  const card = new Card(
+    cardData,
+    '#cardTemplate',
+    handlePopupOpen,
+    userId,
   {
     handleDelitClick: () => {
     console.log('подтверждение удаление карточки')
@@ -162,12 +167,6 @@ function createCard(cardData) {
   return cardElement
 }
 
-// const userInfo = new UserInfo({
-//   userNameSelector: profileName,
-//   aboutUserSelector: profileAbout,
-//   // profileAvatarSelector: profileFoto
-// });
-// console.log(userInfo)
 
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
@@ -217,21 +216,7 @@ const popupAddCard = new PopupWithForm('.popup-cards', {
 });
 popupAddCard.setEventListeners();
 
-// const popupEditAvatar = new PopupWithForm('.popup-edit-avatar', {
-//   callbackSubmit: profileInfo => {
-//     console.log(profileInfo)
-//     api
-//       .updateUserAvatar(profileInfo)
-//       .then(res => {
-//         console.log(res);
-//         userInfo.setUserInfo(res.avatar);
-//         popupEditAvatar.close();
-//       })
-//       .catch(err => {
-//         console.warn(`Error ${err} - ${err.statusText}`)})
-//   }
-// });
-// popupEditAvatar.setEventListeners();
+
 
 
   Promise.all([api.getProfileFromServer(), api.getCardsFromServer()])

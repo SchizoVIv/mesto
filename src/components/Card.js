@@ -39,30 +39,32 @@ export default class Card {
     this._likeButtonCount.textContent = `${res.length}`
   }
 
-  checkMyLike() {
-    this._likes.forEach((elementId) => {
-      if (elementId._id === this._userId) {
-        this.putLike()
-      } else {
-        this.clearLike()
-      }
-    })
+  // checkMyLike() {
+  //   this._likes.forEach((elementId) => {
+  //     if (elementId._id === this._userId) {
+  //       this.putLike()
+  //     } else {
+  //       this.clearLike()
+  //     }
+  //   })
 
-    // const res = (user) => {user._id === this._userId}
-    // console.log(res)
-    // return this._likes.some(res)
-    // return this._likes.some(user => user._id === this._userId);
-  }
+  //   // const res = (user) => {user._id === this._userId}
+  //   // console.log(res)
+  //   // return this._likes.some(res)
+  //   // return this._likes.some(user => user._id === this._userId);
+  // }
 
-  _checkWhoseLike(){
-    this.checkMyLike() ? this.putLike() : this.clearLike();
-  }
+  // _checkWhoseLike(){
+  //   this.checkMyLike() ? this.putLike() : this.clearLike();
+  // }
 
-  _checkWhoseСard(){
-    if (this._ownerId !== this._userId) {
-      this._buttonDelete.classList.add('element__delete-button_hidden');
-    }
-  }
+
+
+  // _checkWhoseСard(){
+  //   if (this._ownerId !== this._userId) {
+  //     this._buttonDelete.classList.add('element__delete-button_hidden');
+  //   }
+  // }
 
   deleteCardsButton() {
     this._element.remove()
@@ -109,11 +111,17 @@ export default class Card {
       this._buttonDelete.classList.add('element__delete-button_hidden')
     }
 
+
     this.likesCount(this._likes)
-    this._checkWhoseСard()
+    this._likes.forEach((elementId) => {
+      if (elementId._id === this._userId) {
+        this.putLike()
+      } else {
+        this.clearLike()
+      }})
 
     this._setEventListener();
-    this._checkWhoseLike()
+
     return this._element;
   }
 
