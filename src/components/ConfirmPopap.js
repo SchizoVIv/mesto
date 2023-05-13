@@ -1,7 +1,7 @@
 import Popup from './Popup.js';
 
 export default class ConfirmPopap extends Popup{
-  constructor(popupSelector, { callbackSubmit }){
+  constructor(popupSelector, callbackSubmit ){
     super(popupSelector);
     this._callbackSubmit = callbackSubmit;
     this._popupForm = this._popup.querySelector(".popup__content");
@@ -12,16 +12,11 @@ export default class ConfirmPopap extends Popup{
     this._callbackSubmit = callback;
   }
 
-  _setEventForSubmit = evt => {
-    evt.preventDefault();
-    this._callbackSubmit();
-  };
-
   setEventListeners() {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault()
-      this.handleSubmit(this._card)
+      this._callbackSubmit(this._card)
     });
   }
 
