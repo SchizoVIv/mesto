@@ -5,7 +5,6 @@ import {
   popupCardsForm,
   popupAvatarForm,
   profileButtonAvatar,
-  popupEditAvatar,
   cardsContainer,
   buttonEditProfile,
   popupFieldName,
@@ -216,7 +215,21 @@ const popupAddCard = new PopupWithForm('.popup-cards', {
 });
 popupAddCard.setEventListeners();
 
-
+const popupEditAvatar = new PopupWithForm('.popup-edit-avatar', {
+  callbackSubmit: profileData => {
+    api
+      .updateUserAvatar(profileData)
+      .then(res => {
+        //console.log(res);
+        userInfo.setAvatar(res.avatar);
+        popupEditAvatar.close();
+      })
+      .catch(err => {
+        console.warn(`Ошибка загрузки автара: ${err} - ${err.statusText}`);
+      })
+  }
+});
+popupEditAvatar.setEventListeners();
 
 
   Promise.all([api.getProfileFromServer(), api.getCardsFromServer()])
