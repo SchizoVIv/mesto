@@ -4,11 +4,18 @@ export default class Api{
     this._headers = headers
   }
 
+  _getResponseData(res) {
+    if (!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status}`);
+    }
+    return res.json();
+  }
+
   getProfileFromServer(){
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-    .then( res =>  res.ok ? res.json() : Promise.reject(res.status))
+    .then(res => this._getResponseData(res))
     .catch(console.log)
   }
 
@@ -16,7 +23,7 @@ export default class Api{
     return fetch(`${this._baseUrl}/cards `, {
       headers: this._headers
     })
-    .then( res =>  res.ok ? res.json() : Promise.reject(res.status))
+    .then(res => this._getResponseData(res))
     .catch(console.log)
   }
 
@@ -29,7 +36,7 @@ export default class Api{
         about: userData.about
       })
     })
-    .then( res =>  res.ok ? res.json() : Promise.reject(res.status))
+    .then(res => this._getResponseData(res))
     .catch(console.log)
   }
 
@@ -39,7 +46,7 @@ export default class Api{
       headers: this._headers,
       body: JSON.stringify(cardData)
     })
-    .then( res =>  res.ok ? res.json() : Promise.reject(res.status))
+    .then(res => this._getResponseData(res))
     .catch(console.log)
   }
 
@@ -48,7 +55,7 @@ export default class Api{
       method: "DELETE",
       headers: this._headers,
     })
-    .then( res =>  res.ok ? res.json() : Promise.reject(res.status))
+    .then(res => this._getResponseData(res))
     .catch(console.log)
   }
 
@@ -57,7 +64,7 @@ export default class Api{
       method: "PUT",
       headers: this._headers,
     })
-    .then( res =>  res.ok ? res.json() : Promise.reject(res.status))
+    .then(res => this._getResponseData(res))
     .catch(console.log)
   }
 
@@ -66,7 +73,7 @@ export default class Api{
       method: "DELETE",
       headers: this._headers,
     })
-    .then( res =>  res.ok ? res.json() : Promise.reject(res.status))
+    .then(res => this._getResponseData(res))
     .catch(console.log)
   }
 
@@ -78,7 +85,7 @@ export default class Api{
         avatar: data.avatar,
       }),
     })
-    .then( res =>  res.ok ? res.json() : Promise.reject(res.status))
+    .then(res => this._getResponseData(res))
     .catch(console.log)
   }
 }

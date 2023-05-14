@@ -20,7 +20,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
-import ConfirmPopap from '../components/ConfirmPopap.js';
+import ConfirmPopup from '../components/ConfirmPopup.js';
 
 
 let userId
@@ -53,13 +53,13 @@ api
   })
 
 
-  api
-    .getCardsFromServer()
-    .then(cardList => {
-      cardList.forEach(data => {
-        sectionList.addItem(createCard(data))
-      })
-    })
+  // api
+  //   .getCardsFromServer()
+  //   .then(cardList => {
+  //     cardList.forEach(data => {
+  //       sectionList.addItem(createCard(data))
+  //     })
+  //   })
 
 const popupWithImage = new PopupWithImage('.popup-open-img')
 popupWithImage.setEventListeners();
@@ -78,7 +78,7 @@ const sectionList = new Section(
   cardsContainer
 );
 
-const popupConfirm = new ConfirmPopap('.popup-question', {
+const popupConfirm = new ConfirmPopup('.popup-question', {
   callbackSubmit: card => {
     api
       .deleteCard(card._id)
@@ -201,17 +201,18 @@ const popupEditAvatar = new PopupWithForm('.popup-edit-avatar', {
       .finally(() => popupEditAvatar.runLoading(false));
   }
 });
-popupEditAvatar.setEventListeners();
+popupEditAvatar.setEventListeners(); 
 
 
-  Promise.all([api.getProfileFromServer(), api.getCardsFromServer()])
-  .then(([profileData, cardData]) => {
-    userInfo.setUserInfo(profileData)
-    userInfo.setAvatar(profileData.avatar)
-    userId = profileData._id
-    console.log(sectionList)
-    sectionList.renderer(cardData)
-  })
+Promise
+  .all([api.getProfileFromServer(), api.getCardsFromServer()])
+    .then(([profileData, cardData]) => {
+      userInfo.setUserInfo(profileData)
+      userInfo.setAvatar(profileData.avatar)
+      userId = profileData._id
+      console.log(sectionList)
+      sectionList.renderer(cardData)
+    })
 
 buttonEditProfile.addEventListener("click", function (){
   const profileInfo = userInfo.getUserInfo();
