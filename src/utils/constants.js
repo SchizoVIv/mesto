@@ -6,6 +6,7 @@ export const popupFieldAbout = document.querySelector('.popup__field_about');
 export const popupFieldName = document.querySelector('.popup__field_name');
 export const profileName = document.querySelector('.profile__name');
 export const profileAbout = document.querySelector('.profile__about');
+export const profileFoto = document.querySelector('.profile__photo');
 export const popupContentProfileForm = document.querySelector('#popapContentProfile');
 export const popupContentCardsForm = document.querySelector('#popapContentCards');
 export const cardTemplate = document.querySelector('#cardTemplate').content.querySelector('.element');
@@ -20,6 +21,9 @@ export const windowImage = windowImgConteiner.querySelector('.popup-open-img__im
 export const windowTitle = windowImgConteiner.querySelector('.popup-open-img__title');
 export const popupProfileForm = document.forms['popapProfile'];
 export const popupCardsForm = document.forms['popapCards'];
+export const popupAvatarForm = document.forms['popapAvatar'];
+export const profileButtonAvatar = document.querySelector('.profile__button-avatar');
+export const popupEditAvatar = document.querySelector('.popup-edit-avatar')
 
 export const config = {
   formSelector: '.popup__content',
