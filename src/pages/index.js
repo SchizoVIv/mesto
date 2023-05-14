@@ -206,13 +206,13 @@ popupEditAvatar.setEventListeners();
 
 Promise
   .all([api.getProfileFromServer(), api.getCardsFromServer()])
-    .then(([profileData, cardData]) => {
-      userInfo.setUserInfo(profileData)
-      userInfo.setAvatar(profileData.avatar)
-      userId = profileData._id
-      console.log(sectionList)
-      sectionList.renderer(cardData)
-    })
+  .then(([profileData, cardData]) => {
+    userInfo.setUserInfo(profileData)
+    userInfo.setAvatar(profileData.avatar)
+    userId = profileData._id
+    console.log(sectionList)
+    sectionList.renderer(cardData)
+  })
 
 buttonEditProfile.addEventListener("click", function (){
   const profileInfo = userInfo.getUserInfo();
