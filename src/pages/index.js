@@ -201,11 +201,11 @@ const popupEditAvatar = new PopupWithForm('.popup-edit-avatar', {
       .finally(() => popupEditAvatar.runLoading(false));
   }
 });
-popupEditAvatar.setEventListeners();
+popupEditAvatar.setEventListeners(); 
 
 
-  Promise
-    .all([api.getProfileFromServer(), api.getCardsFromServer()])
+Promise
+  .all([api.getProfileFromServer(), api.getCardsFromServer()])
     .then(([profileData, cardData]) => {
       userInfo.setUserInfo(profileData)
       userInfo.setAvatar(profileData.avatar)
