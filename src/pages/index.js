@@ -210,7 +210,7 @@ popupEditAvatar.setEventListeners();
     userInfo.setAvatar(profileData.avatar)
     userId = profileData._id
     console.log(sectionList)
-    sectionList.addItem(cardData)
+    sectionList.renderer(cardData)
   })
 
 buttonEditProfile.addEventListener("click", function (){
