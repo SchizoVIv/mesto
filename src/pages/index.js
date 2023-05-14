@@ -106,7 +106,7 @@ function createCard(cardData) {
       api
         .removeCard(cardData._id)
         .then(() => {
-          card.deleteCardsButton()
+          card.deleteCard()
           popupConfirm.close();
         })
         .catch(err => { console.log(`Error: ${err}`)});
