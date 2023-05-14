@@ -4,14 +4,6 @@ export default class Api{
     this._headers = headers
   }
 
-  // _handleServerResponse(res) {
-  //   if (res.ok) {
-  //     return res.json();
-  //   } else {
-  //     return Promise.reject(`Error:${res.status}`);
-  //   }
-  // }
-
   getProfileFromServer(){
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
@@ -29,7 +21,6 @@ export default class Api{
   }
 
   editProfile(userData){
-    console.log(userData)
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
@@ -53,7 +44,6 @@ export default class Api{
   }
 
   removeCard(cardId) {
-    console.log(cardId)
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
@@ -63,8 +53,6 @@ export default class Api{
   }
 
   addLike(cardId) {
-    console.log(cardId)
-
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,

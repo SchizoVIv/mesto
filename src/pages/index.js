@@ -22,20 +22,12 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import ConfirmPopap from '../components/ConfirmPopap.js';
 
-// Promise.all([api.getRealUserInfo(), api.getInitialCards()])
-//   .then(([userProfile, cards]) => {
-//     user.setUserInfo(userProfile)
-//     userId = userProfile._id
-//     cardList.renderItems(cards)
-//   })
-
-
 
 let userId
 
 const profileFormValidator = new FormValidator(config, popupProfileForm);
 const addingFormValidator = new FormValidator(config, popupCardsForm);
-// const editAvatarFormPopup = new FormValidator(config, popupAvatarForm);
+const editAvatarFormPopup = new FormValidator(config, popupAvatarForm);
 
 
 
@@ -56,25 +48,10 @@ api
       about: res.about,
       avatar: res.avatar
     };
-    console.log(info)
-    console.log(res)
-    console.log('!')
 
     userInfo.setUserInfo(res)
   })
-// api
-//   .getProfileFromServer()
-//   .then( res => {
-//     const info = {
-//       userName: res.name,
-//       aboutUser: res.about,
-//       userAvatar: res.avatar
-//     };
-//     console.log(info)
-//     console.log(res)
 
-//     userInfo.setUserInfo(res)
-//   })
 
   api
     .getCardsFromServer()
@@ -124,7 +101,6 @@ function createCard(cardData) {
     userId,
   {
     handleDelitClick: () => {
-    console.log('подтверждение удаление карточки')
     popupConfirm.open(card)
     popupConfirm.handleSubmit(() => {
       api
@@ -141,7 +117,6 @@ function createCard(cardData) {
       api
         .addLike(cardData._id)
         .then((item) => {
-          console.log(`index likeCard ${cardData}`)
           card.putLike()
           card.likesCount(item.likes)
         })
@@ -153,7 +128,6 @@ function createCard(cardData) {
       api
         .removeLike(cardData._id)
         .then((item) => {
-          console.log(`index dislike ${cardData}`)
           card.clearLike()
           card.likesCount(item.likes)
         })
@@ -171,62 +145,60 @@ const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
   aboutUserSelector: '.profile__about',
   profileAvatarSelector: '.profile__photo'
-});profileName
-console.log(userInfo)
+})
 
 
 const popupWithForm = new PopupWithForm('.popup-profile', {
   callbackSubmit: userData => {
-    console.log('!')
   const newInfo = {
     userName: userData.name,
     aboutUser: userData.about,
     userAvatar: userData.avatar
   };
-
+  popupWithForm.runLoading(true);
   api
     .editProfile(userData) //сохраняет измененные данные профиля после обновления
     .then( res => {
       console.log('res', res)
-      console.log(userData)
       userInfo.setUserInfo(res);
       popupWithForm.close();
     })
+    .finally(() => popupWithForm.runLoading(false));
 }})
 popupWithForm.setEventListeners();
 
 const popupAddCard = new PopupWithForm('.popup-cards', {
   callbackSubmit: cardData => {
-    console.log(cardData)
     const newCard = {
       name: cardData.title,
       link: cardData.link,
       likes: cardData.likes,
       id: cardData._id
     };
+    popupAddCard.runLoading(true);
     api.addCard(newCard)
       .then(res => {
         sectionList.addItem(createCard(res));
-        console.log(res)
-
         popupAddCard.close();
       })
+      .finally(() => popupAddCard.runLoading(false));
   }
 });
 popupAddCard.setEventListeners();
 
 const popupEditAvatar = new PopupWithForm('.popup-edit-avatar', {
   callbackSubmit: profileData => {
+    popupEditAvatar.runLoading(true);
     api
       .updateUserAvatar(profileData)
       .then(res => {
-        //console.log(res);
         userInfo.setAvatar(res.avatar);
         popupEditAvatar.close();
       })
       .catch(err => {
         console.warn(`Ошибка загрузки автара: ${err} - ${err.statusText}`);
       })
+      .finally(() => popupEditAvatar.runLoading(false));
   }
 });
 popupEditAvatar.setEventListeners();
@@ -235,6 +207,7 @@ popupEditAvatar.setEventListeners();
   Promise.all([api.getProfileFromServer(), api.getCardsFromServer()])
   .then(([profileData, cardData]) => {
     userInfo.setUserInfo(profileData)
+    userInfo.setAvatar(profileData.avatar)
     userId = profileData._id
     sectionList.renderItems(cardData)
   })
@@ -248,7 +221,6 @@ buttonEditProfile.addEventListener("click", function (){
 
 
 profileButtonAvatar.addEventListener('click', () => {
-  // editAvatarFormPopup.resetValidation();
   popupEditAvatar.open();
 });
 
@@ -258,4 +230,4 @@ buttonAdd.addEventListener('click', () => {
 
 profileFormValidator.enableValidation();
 addingFormValidator.enableValidation();
-// editAvatarFormPopup.enableValidation();
+editAvatarFormPopup.enableValidation();

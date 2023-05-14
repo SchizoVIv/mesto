@@ -100,11 +100,11 @@
         <div class="popup__container popup__container_width_100">
           <button class="popup__close-button button-hover" type="button"></button>
           <h2 class="popup__title">Обновить аватар</h2>
-          <form class="popup__content " name="popapAvatar" novalidate>
-            <!-- <label class="popup__label"> -->
-              <input class="popup__field popup__field_link-avatar" id="InputAvatar" name="avatar" type="url" placeholder="Введите ссылку URL" required>
-              <span class="popup__input-error popup__input-error_avatar"></span>
-            <!-- </label> -->
+          <form class="popup__content " id="popapAvatar" action novalidate>
+            <fieldset class="popup__fieldset">
+              <input class="popup__field popup__field_link-avatar" id="ignputAvatar" name="avatar" type="url" pattern="https://.*" placeholder="Введите ссылку URL" required>
+              <span class="popup__input-error popup__input-error_type_ignputAvatar"></span>
+            </fieldset>
             <button class="popup__save-button" type="submit">Сохранить</button>
           </form>
         </div>
