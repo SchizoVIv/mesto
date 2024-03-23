@@ -4,8 +4,6 @@
   min-height: 74px;
   margin: 45px auto 0;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
-  background-image: url(../../image/logo.svg);
-  background-repeat: no-repeat;
 }
 @media screen and (max-width: 1024px) {
     .header{

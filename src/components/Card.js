@@ -22,10 +22,6 @@ export default class Card {
     this._ownerId = data.owner._id
   }
 
-  // _toggleLike () {
-  //   this._buttonLike.classList.toggle('element__like-button_active')
-  // }
-
   putLike() {
     this._buttonLike.classList.add('element__like-button_active')
   }
@@ -47,24 +43,7 @@ export default class Card {
         this.clearLike()
       }
     })
-
-    // const res = (user) => {user._id === this._userId}
-    // console.log(res)
-    // return this._likes.some(res)
-    // return this._likes.some(user => user._id === this._userId);
   }
-
-  // _checkWhoseLike(){
-  //   this.checkMyLike() ? this.putLike() : this.clearLike();
-  // }
-
-
-
-  // _checkWhoseСard(){
-  //   if (this._ownerId !== this._userId) {
-  //     this._buttonDelete.classList.add('element__delete-button_hidden');
-  //   }
-  // }
 
   deleteCardsButton() {
     this._element.remove()
